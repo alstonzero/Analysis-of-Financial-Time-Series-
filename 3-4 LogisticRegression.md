@@ -9,7 +9,11 @@ $$w_{k+1} = w_{k}-\eta(y_{n}-t_{n})x_{n} $$
 
 $$b_{k+1} = b_{k}-\eta(y_{n}-t_{n})$$
 
-
+\displaystyle
+\left( \sum\_{k=1}^n a\_k b\_k \right)^2
+\leq
+\left( \sum\_{k=1}^n a\_k^2 \right)
+\left( \sum\_{k=1}^n b\_k^2 \right)
 
 本次Logistic回归使用OR门实现，input的维度为2元，data的数量只有4个。本次使用batch学习，而不是mini-batch梯度下降法。
 
