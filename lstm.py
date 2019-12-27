@@ -81,12 +81,12 @@ regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
 real_stock_price = dataset_total.iloc[train_size:len(dataset_total), 5:6].values  #真实price的adj close
 
 # Getting the predicted stock price of 2017
-dataset_total = pd.concat((dataset_train['Open'], dataset_test['Open']), axis = 0) 
-inputs = dataset_total[len(dataset_total) - len(dataset_test) - 60:].values
+#dataset_total = pd.concat((dataset_train['Open'], dataset_test['Open']), axis = 0) 
+inputs = dataset_total[len(dataset_total) - len(dataset_test) - 60:5,6].values #inputs从testdata之前的60个开始。预测testdata的第一个
 inputs = inputs.reshape(-1,1)
 inputs = sc.transform(inputs)
 X_test = []
-for i in range(60, len(inputs)+60):
+for i in range(60, len(dataset_test)+60): 
     X_test.append(inputs[i-60:i, 0])
 X_test = np.array(X_test)
 X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
