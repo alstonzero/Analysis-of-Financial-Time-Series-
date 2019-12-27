@@ -82,11 +82,11 @@ real_stock_price = dataset_total.iloc[train_size:len(dataset_total), 5:6].values
 
 # Getting the predicted stock price of 2017
 #dataset_total = pd.concat((dataset_train['Open'], dataset_test['Open']), axis = 0) 
-inputs = dataset_total[len(dataset_total) - len(dataset_test) - 60:5,6].values #inputs从testdata之前的60个开始。预测testdata的第一个
+inputs = dataset_total.iloc[len(dataset_total) - len(test_set) - 60:len(dataset_total),5:6].values #inputs从testdata之前的60个开始。预测testdata的第一个
 inputs = inputs.reshape(-1,1)
 inputs = sc.transform(inputs)
 X_test = []
-for i in range(60, len(dataset_test)+60): 
+for i in range(60, len(test_set)+60): 
     X_test.append(inputs[i-60:i, 0])
 X_test = np.array(X_test)
 X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
@@ -96,6 +96,8 @@ predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 # Visualising the results
 plt.plot(real_stock_price, color = 'red', label = 'Real 股票名称 Stock Price')
 plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted 股票名称 Stock Price')
+#plt.xlim((0, 800)) #坐标轴范围
+#plt.ylim((18000, 30000))
 plt.title('股票名称 Stock Price Prediction')
 plt.xlabel('Time')
 plt.ylabel('股票名称 Stock Price')
