@@ -43,7 +43,7 @@ def gradient_descent(f,init_x,lr=0.01,step_num=100):
     
     for i in range(step_num):
         grad = numerical_gradient(f,x) #计算梯度
-        x- = lr*grad #更新参数
+        x -= lr*grad #更新参数
         
     return x
 ```
